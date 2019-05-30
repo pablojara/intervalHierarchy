@@ -1,14 +1,9 @@
 package tdd.intervalHierarchy;
 
-public class OpenInterval {
-
-	private double min;
-	
-	private double max;
+public class OpenInterval extends Interval {
 
 	public OpenInterval(double min, double max) {
-		this.min = min;
-		this.max = max;
+		super(min,max);
 	}
 	
 	public boolean isIntersected(OpenInterval another) {
