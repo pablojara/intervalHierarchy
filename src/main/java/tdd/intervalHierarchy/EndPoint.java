@@ -2,16 +2,16 @@ package tdd.intervalHierarchy;
 
 public abstract class EndPoint {
 
-	protected double data;
+	protected double value;
 	
 	protected boolean open;
 	
 	public double getData() {
-		return data;
+		return value;
 	}
 
 	public void setData(double data) {
-		this.data = data;
+		this.value = data;
 	}
 
 	public boolean isOpen() {
@@ -22,5 +22,8 @@ public abstract class EndPoint {
 		this.open = open;
 	}
 	
+	public abstract boolean isInLeft(double value);
 	
+	public abstract boolean isInRight(double value);
+
 }

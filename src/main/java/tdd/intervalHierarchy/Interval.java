@@ -29,24 +29,14 @@ public class Interval {
 	}
 
 	public boolean isIntersected(Interval another) {
-		if(!FEP.isOpen() && !UEP.isOpen())
-		{
-			return this.isIncludedClosed(another.getFEP().getData()) ||
-					this.isIncludedClosed(another.getUEP().getData())||
-					another.isIncludedClosed(this.getFEP().getData());
-		}
-		return this.isIncludedOpen(another.getFEP().getData())  ||
-				this.isIncludedOpen(another.getUEP().getData()) ||
-				another.isIncludedOpen(this.getFEP().getData()) ||
-				this.getFEP().getData() == another.getFEP().getData();
+			return this.isIncluded(another.getFEP().getData())  ||
+					this.isIncluded(another.getUEP().getData()) ||
+					another.isIncluded(this.FEP.getData()) ||
+					this.FEP.getData() == another.getFEP().getData();
 	}
 
-	public boolean isIncludedClosed(double value) {
-		return this.getFEP().getData() <= value && value <= this.getUEP().getData();
+	public boolean isIncluded(double value) {
+		return this.FEP.isInLeft(value) && this.UEP.isInRight(value);
 	}
 	
-	public boolean isIncludedOpen(double value) {
-		return this.getFEP().getData() < value && value < this.getUEP().getData();
-	}
-
 }
