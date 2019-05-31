@@ -3,13 +3,29 @@ package tdd.intervalHierarchy;
 public abstract class Interval {
 	
 	public Interval(double min, double max) {
-		this.min = min;
-		this.max = max;
+		this.FEP = new FromEndPoint();
+		this.UEP = new UntilEndPoint();
+		
+		FEP.setData(min);
+		UEP.setData(max);
+	}
+	
+	public FromEndPoint getFEP() {
+		return FEP;
+	}
+	public void setFEP(FromEndPoint fEP) {
+		FEP = fEP;
+	}
+	public UntilEndPoint getUEP() {
+		return UEP;
+	}
+	public void setUEP(UntilEndPoint uEP) {
+		UEP = uEP;
 	}
 
-	protected double min;
+	FromEndPoint FEP;
+	UntilEndPoint UEP;
 	
-	protected double max;
 	
 	abstract public boolean isIntersected(Interval another);
 	abstract protected boolean isIncluded(double value);
