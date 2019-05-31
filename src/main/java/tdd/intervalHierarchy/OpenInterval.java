@@ -6,16 +6,17 @@ public class OpenInterval extends Interval {
 		super(min,max);
 	}
 	
-	public boolean isIntersected(OpenInterval another) {
+	public boolean isIntersected(Interval another) {
 		return this.isIncluded(another.min) ||
 				this.isIncluded(another.max)||
 				another.isIncluded(this.min)||
 				 this.min == another.min;
 	}
 
-	private boolean isIncluded(double value) {
+	protected boolean isIncluded(double value) {
 		return this.min < value && value < this.max;
 	}
+
 
 	
 	

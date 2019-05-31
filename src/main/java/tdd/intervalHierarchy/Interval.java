@@ -10,5 +10,8 @@ public abstract class Interval {
 	protected double min;
 	
 	protected double max;
+	
+	abstract public boolean isIntersected(Interval another);
+	abstract protected boolean isIncluded(double value);
 
 }
