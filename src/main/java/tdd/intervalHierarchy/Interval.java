@@ -10,7 +10,7 @@ public class Interval {
 		this.UEP = new EndPoint();
 		FEP.setValue(min);
 		UEP.setValue(max);
-		FEP.setOpen(openUEP);
+		FEP.setOpen(openFEP);
 		UEP.setOpen(openUEP);
 	}
 	
@@ -28,7 +28,8 @@ public class Interval {
 	}
 
 	public boolean isIntersected(Interval another) {
-			return this.isIncluded(another.getFEP())  ||
+			return (this.isEmpty() || another.isEmpty()) ||
+					this.isIncluded(another.getFEP())  ||
 					this.isIncluded(another.getUEP()) ||
 					another.isIncluded(this.FEP) ||
 					this.FEP.getValue() == another.getFEP().getValue();
@@ -36,6 +37,11 @@ public class Interval {
 
 	public boolean isIncluded(EndPoint point) {
 		return this.FEP.isInLeft(point) && this.UEP.isInRight(point);
+	}
+	
+	public boolean isEmpty() {
+		return this.FEP.getValue() == this.UEP.getValue();
+		
 	}
 	
 }
