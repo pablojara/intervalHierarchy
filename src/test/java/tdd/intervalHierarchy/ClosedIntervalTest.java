@@ -62,7 +62,12 @@ public class ClosedIntervalTest extends TestCase {
 		assertFalse(one.isIntersected(another));
 	}
 	
-
+	@Test
+	public void testIsIntersectedNotOverlapingByOne() {
+		Interval one = new IntervalBuilder().min(3).max(14).openFEP(false).openUEP(false).build();
+		Interval another = new IntervalBuilder().min(14).max(22).openFEP(false).openUEP(false).build();
+		assertTrue(one.isIntersected(another));
+	}
 	
 	
 }
