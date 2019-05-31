@@ -1,14 +1,18 @@
 package tdd.intervalHierarchy;
 
-public abstract class IntervalBuilder {
+public class IntervalBuilder {
 	
-	protected double min;
+	private double min;
+	private double max;
 	
-	protected double max;
+	private boolean openFEP;
+	private boolean openUEP;
 	
 	IntervalBuilder(){
 		this.min = 0;
 		this.max = 1;
+		this.openFEP = false;
+		this.openUEP = false;
 	}
 	
 	IntervalBuilder min(double min) {
@@ -21,6 +25,19 @@ public abstract class IntervalBuilder {
 		return this;
 	}
 	
-	public abstract Interval build();
+	IntervalBuilder openFEP(boolean open) {
+		this.openFEP = open;
+		return this;
+	}
+	
+	IntervalBuilder openUEP(boolean open) {
+		this.openUEP = open;
+		return this;
+	}
+	
+	public Interval build() {
+		return new Interval(min, max, openFEP, openUEP);
+		
+	}
 	
 }

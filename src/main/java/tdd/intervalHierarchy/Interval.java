@@ -1,13 +1,18 @@
 package tdd.intervalHierarchy;
 
-public abstract class Interval {
+public class Interval {
 	
-	public Interval(double min, double max) {
+	FromEndPoint FEP;
+	UntilEndPoint UEP;
+	
+	public Interval(double min, double max, boolean openFEP, boolean openUEP) {
 		this.FEP = new FromEndPoint();
 		this.UEP = new UntilEndPoint();
 		
 		FEP.setData(min);
 		UEP.setData(max);
+		FEP.setOpen(openUEP);
+		UEP.setOpen(openUEP);
 	}
 	
 	public FromEndPoint getFEP() {
@@ -23,11 +28,25 @@ public abstract class Interval {
 		UEP = uEP;
 	}
 
-	FromEndPoint FEP;
-	UntilEndPoint UEP;
+	public boolean isIntersected(Interval another) {
+		if(!FEP.isOpen() && !UEP.isOpen())
+		{
+			return this.isIncludedClosed(another.getFEP().getData()) ||
+					this.isIncludedClosed(another.getUEP().getData())||
+					another.isIncludedClosed(this.getFEP().getData());
+		}
+		return this.isIncludedOpen(another.getFEP().getData())  ||
+				this.isIncludedOpen(another.getUEP().getData()) ||
+				another.isIncludedOpen(this.getFEP().getData()) ||
+				this.getFEP().getData() == another.getFEP().getData();
+	}
+
+	public boolean isIncludedClosed(double value) {
+		return this.getFEP().getData() <= value && value <= this.getUEP().getData();
+	}
 	
-	
-	abstract public boolean isIntersected(Interval another);
-	abstract protected boolean isIncluded(double value);
+	public boolean isIncludedOpen(double value) {
+		return this.getFEP().getData() < value && value < this.getUEP().getData();
+	}
 
 }
