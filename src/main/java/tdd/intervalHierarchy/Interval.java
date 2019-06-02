@@ -28,11 +28,11 @@ public class Interval {
 	}
 
 	public boolean isIntersected(Interval another) {
-			return (this.isEmpty() || another.isEmpty()) ||
-					this.isIncluded(another.getFEP())  ||
+			return (!this.isEmpty() && !another.isEmpty()) &&
+					(this.isIncluded(another.getFEP())  ||
 					this.isIncluded(another.getUEP()) ||
 					another.isIncluded(this.FEP) ||
-					this.FEP.getValue() == another.getFEP().getValue();
+					this.FEP.getValue() == another.getFEP().getValue());
 	}
 
 	public boolean isIncluded(EndPoint point) {

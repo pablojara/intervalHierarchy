@@ -13,14 +13,7 @@ public class OpenClosedIntervalTest {
 		Interval another = new IntervalBuilder().min(14).max(18).openFEP(true).openUEP(false).build();
 		assertFalse(one.isIntersected(another));
 	}
-	
-	@Test
-	public void testIsIntersectedOverlapingByLeftWithEquals() {
-		Interval one = new IntervalBuilder().min(3).max(3).openFEP(true).openUEP(true).build();
-		Interval another = new IntervalBuilder().min(2).max(6).openFEP(true).openUEP(true).build();
-		assertFalse(one.isIntersected(another));
-	}
-	
+
 	@Test
 	public void testIsIntersectedOverlapingByEquals() {
 		Interval one = new IntervalBuilder().min(3).max(14).openFEP(true).openUEP(true).build();
@@ -69,4 +62,19 @@ public class OpenClosedIntervalTest {
 		Interval another = new IntervalBuilder().min(14).max(22).openFEP(false).openUEP(false).build();
 		assertTrue(one.isIntersected(another));
 	}
+	
+	@Test
+	public void testIsIntersectedOneEmptyInterval() {
+		Interval one = new IntervalBuilder().min(3).max(3).openFEP(true).openUEP(true).build();
+		Interval another = new IntervalBuilder().min(2).max(6).openFEP(true).openUEP(true).build();
+		assertFalse(one.isIntersected(another));
+	}
+	
+	@Test
+	public void testIsIntersectedTwoEmptyInterval() {
+		Interval one = new IntervalBuilder().min(3).max(3).openFEP(true).openUEP(true).build();
+		Interval another = new IntervalBuilder().min(3).max(3).openFEP(true).openUEP(true).build();
+		assertFalse(one.isIntersected(another));
+	}
+	
 }
